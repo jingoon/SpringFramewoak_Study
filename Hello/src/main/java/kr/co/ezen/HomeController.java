@@ -44,4 +44,10 @@ public class HomeController {
 		return "good";
 	}
 	
+	@RequestMapping(value = "/pjg", method = RequestMethod.GET )
+	public String pjg1(Model model) {
+		model.addAttribute("name", "park jin goon");
+		return "pjg2";
+	}
+	
 }
