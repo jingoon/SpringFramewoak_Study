@@ -22,6 +22,7 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="kr.co.ezen" />
+	<context:component-scan base-package="kr.co.show" />
 	
 	
 	
