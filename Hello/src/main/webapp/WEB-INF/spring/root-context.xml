@@ -20,5 +20,10 @@
 		<property name="username" value="spring_study"></property>
 		<property name="password" value="spring_study"></property>
 	</bean>
+	<!--sql과의 연결도 관여  -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property><!--이미 생성된 객체는 ref 속성 사용  -->
+		<property name="configLocation" value="classpath:/mybatis-config.xml"></property>
+	</bean>
 		
 </beans>
