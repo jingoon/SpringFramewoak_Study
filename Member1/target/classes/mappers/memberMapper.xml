@@ -6,4 +6,7 @@
 	<select id="getTime" resultType="string">
 		SELECT SYSDATE FROM DUAL
 	</select>
+	<insert id="insert">
+		INSERT INTO MEMBER (userId, userPw, userName, email) VALUES (#{userId},#{userPw},#{userName},#{email})
+	</insert>
 </mapper>

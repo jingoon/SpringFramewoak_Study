@@ -6,3 +6,5 @@ email varchar2(100),
 regdate date default sysdate,
 updatedate date default sysdate
 )
+
+select * from member

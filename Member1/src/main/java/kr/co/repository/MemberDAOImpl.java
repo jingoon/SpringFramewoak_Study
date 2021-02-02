@@ -5,6 +5,8 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import kr.co.domain.MemberVO;
+
 @Repository
 public class MemberDAOImpl implements MemberDAO{
 
@@ -14,6 +16,10 @@ public class MemberDAOImpl implements MemberDAO{
 	@Override
 	public String getTime() {
 		return sqlSession.selectOne(NS+".getTime"); //mapper의 id
+	}
+	@Override
+	public void insert(MemberVO vo) {
+		sqlSession.insert(NS+".insert", vo);
 	}
 
 }

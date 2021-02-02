@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import kr.co.domain.MemberVO;
 import kr.co.service.MemberService;
 
 
@@ -25,6 +26,19 @@ public class HomeController {
 	
 	@Autowired
 	private MemberService memberService; // controller는 service를 호출
+	
+	//insert view
+	@RequestMapping(value = "insert", method = RequestMethod.GET)
+	public void insert() {
+	}
+	//insert method
+	@RequestMapping(value = "insert", method = RequestMethod.POST)
+	public String insert(MemberVO vo) {
+		memberService.insert(vo);
+		return "redirect:/getTime";// 일단 임시로. 추후 변경
+	}
+	
+	//getTime 메서드 SYSDATE 반환
 	@RequestMapping(value = "getTime", method = RequestMethod.GET)
 	public void getTime(Model model) {
 		model.addAttribute("time", memberService.getTime());
