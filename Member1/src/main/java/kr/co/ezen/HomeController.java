@@ -27,6 +27,18 @@ public class HomeController {
 	@Autowired
 	private MemberService memberService; // controller는 service를 호출
 	
+	//update view
+	@RequestMapping(value = "update", method = RequestMethod.GET)
+	public void update(String id, Model model) {
+		MemberVO vo = memberService.userInfo(id);
+		model.addAttribute("vo", vo);
+	}
+	@RequestMapping(value = "update", method = RequestMethod.POST)
+	public String update(MemberVO vo) {
+		memberService.update(vo);
+		return "redirect:/update?id="+vo.getUserId(); // 임시 추후 변경. // post에서 return 하면 post로 포워딩 하나? redirect없으면 오류
+	}
+	
 	//insert view
 	@RequestMapping(value = "insert", method = RequestMethod.GET)
 	public void insert() {
@@ -44,7 +56,7 @@ public class HomeController {
 		model.addAttribute("time", memberService.getTime());
 	}
 
-	
+	//Home
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);

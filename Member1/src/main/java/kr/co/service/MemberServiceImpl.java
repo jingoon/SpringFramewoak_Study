@@ -20,5 +20,13 @@ public class MemberServiceImpl implements MemberService{
 	public void insert(MemberVO vo) {
 		memberDAO.insert(vo);
 	}
+	@Override
+	public MemberVO userInfo(String id) {
+		return memberDAO.userInfo(id);
+	}
+	@Override
+	public void update(MemberVO vo) {
+		memberDAO.update(vo);
+	}
 
 }

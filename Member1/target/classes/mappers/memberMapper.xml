@@ -6,7 +6,13 @@
 	<select id="getTime" resultType="string">
 		SELECT SYSDATE FROM DUAL
 	</select>
+	<select id="userInfo" resultType="kr.co.domain.MemberVO">
+		SELECT * FROM member WHERE userId = #{id}
+	</select>
 	<insert id="insert">
 		INSERT INTO MEMBER (userId, userPw, userName, email) VALUES (#{userId},#{userPw},#{userName},#{email})
 	</insert>
+	<update id="update">
+		UPDATE member SET userName=#{userName}, email=#{email}, updateDate = SYSDATE WHERE userId = #{userId}
+	</update>
 </mapper>

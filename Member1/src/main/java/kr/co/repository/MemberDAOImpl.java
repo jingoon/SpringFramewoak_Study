@@ -21,5 +21,13 @@ public class MemberDAOImpl implements MemberDAO{
 	public void insert(MemberVO vo) {
 		sqlSession.insert(NS+".insert", vo);
 	}
+	@Override
+	public MemberVO userInfo(String id) {
+		return sqlSession.selectOne(NS+".userInfo", id);
+	}
+	@Override
+	public void update(MemberVO vo) {
+		sqlSession.update(NS+".update", vo);
+	}
 
 }
