@@ -29,19 +29,20 @@
 			Date<input value='<fmt:formatDate value="${vo.regdate }" type="date" pattern="yyyy-MM-dd" />' readonly><br>
 		</form>
 		<a id="update" href="/update/${vo.userId }">수정</a>
-		<a id="delete" href="/deleteConfirm/${vo.userId }">삭제</a>
+		<a id="delete">삭제</a>
 	</div>
 	
 	<script type="text/javascript">
 		$(document).ready(function(){
 			$("#delete").click(function(e){
 				e.preventDefault();
-				var pw = $("#pw").val();
-				var inpw = prompt("비밀번호를 입력하세요");
+				var pw = 4848;
+				var inpw = prompt("삭제하려면 [4848]을 입력하세요");
 				if(pw == inpw){
+					console.log(inpw)
 					location.assign("/deleteConfirm/${vo.userId }");
 				}else{
-					alert("비밀번호가 틀렸습니다.")
+					alert("삭제가 취소되었습니다.")
 				}
 			})
 
