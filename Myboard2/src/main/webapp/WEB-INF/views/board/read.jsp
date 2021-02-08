@@ -18,12 +18,49 @@
  src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 </head>
 <body>
+<div class="container">
+	<div class="row">
+		<h1 class="jumbotron">게시글 보기</h1>
+	</div>
+	<div class="row">
+		<div class="form-group">
+			<label for="read_input_title">제목</label>
+			<input class="form-control" name="title" id="read_input_title" readonly value="${vo.title }">
+		</div>
+		<div class="form-group">
+			<label>작성자</label>
+			<input class="form-control" name="writer" id="read_input_writer" readonly value="${vo.writer}">
+		</div>
+		<div class="form-group">
+			<label>작성시각</label>
+			<input class="form-control" name="updateDate" id="read_input_updateDate" readonly value='<fmt:formatDate value="${vo.updateDate}" type="date" pattern="yy년 MM월 dd일 HH:mm"/>'>
+		</div>
+		<div class="form-group">
+			<label>내용</label>
+			<textarea class="form-control" name="content" id="read_input_content" readonly>${vo.content}</textarea>
+		</div>
+		<div class="form-group">
+			<button id="read_btn_update" class="btn btn-warning">수정</button>
+			<button id="read_btn_delete" class="btn btn-danger">삭제</button>
+			<button id="read_btn_reply" class="btn btn-default">댓글</button>
+			<button id="read_btn_list" class="btn btn-primary">목록</button>
+		</div>
+	</div>
+</div>
 
-<h1>게시글 보기</h1>
-제목 : ${vo.title }<br>
-작성자 : ${vo.writer }<br>
-내용 : ${vo.content }<br>
 
 
+
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#read_btn_update").click(function(){
+			location.assign("/board/update/${bno}");
+		});
+		$("#read_btn_list").click(function(){
+			location.assign("/board/list");
+		});
+	})
+</script>
 </body>
 </html>
