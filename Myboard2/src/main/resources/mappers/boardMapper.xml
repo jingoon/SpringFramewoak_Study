@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="kr.co.board">
+  	<insert id="insert">
+  		insert into board (bno, title, content, writer) 
+  		values((select nvl2(max(bno), max(bno)+1, 1) from board), #{title}, #{content}, #{writer})
+  		<selectKey order="AFTER" keyProperty="bno" resultType="Integer">
+  			select max(bno) from board
+  		</selectKey>
+  	</insert>
+  
+  	<select id="list" resultType="kr.co.domain.BoardVO">
+  		select * from board order by bno desc
+  	</select>
+  	<select id="read" resultType="kr.co.domain.BoardVO">
+  		select * from board where bno = #{bno}
+  	</select>
+  
+  </mapper>
