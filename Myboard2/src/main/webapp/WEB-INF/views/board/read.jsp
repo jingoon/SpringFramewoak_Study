@@ -37,7 +37,7 @@
 		</div>
 		<div class="form-group">
 			<label>내용</label>
-			<textarea class="form-control" name="content" id="read_input_content" readonly>${vo.content}</textarea>
+			<textarea class="form-control" rows="10" name="content" id="read_input_content" readonly>${vo.content}</textarea>
 		</div>
 		<div class="form-group">
 			<button id="read_btn_update" class="btn btn-warning">수정</button>

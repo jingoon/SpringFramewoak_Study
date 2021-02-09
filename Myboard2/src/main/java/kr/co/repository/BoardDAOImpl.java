@@ -23,7 +23,7 @@ public class BoardDAOImpl implements BoardDAO{
 	}
 
 	@Override
-	public BoardVO read(String bno) {
+	public BoardVO read(int bno) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne(NS+".read", bno);
 	}
@@ -33,5 +33,12 @@ public class BoardDAOImpl implements BoardDAO{
 		sqlSession.insert(NS+".insert", vo);
 		
 	}
+
+	@Override
+	public void update(BoardVO vo) {
+		sqlSession.update(NS+".update", vo);
+		
+	}
+
 
 }

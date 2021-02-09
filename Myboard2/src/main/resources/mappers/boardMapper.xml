@@ -17,5 +17,9 @@
   	<select id="read" resultType="kr.co.domain.BoardVO">
   		select * from board where bno = #{bno}
   	</select>
+  	<update id="update">
+  		update board set title=#{title}, content=#{content}, writer=#{writer}, updateDate=sysDate 
+  		where bno = #{bno}
+  	</update>
   
   </mapper>

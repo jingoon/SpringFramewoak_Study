@@ -13,10 +13,25 @@ import kr.co.service.BoardService;
 
 @org.springframework.stereotype.Controller
 @RequestMapping("/board")
-public class Controller {
+public class BoardController {
 	
 	@Autowired
 	BoardService boardService;
+	
+	//delete 할 차례이다!
+	
+	@RequestMapping(value = "/update/{bno}", method = RequestMethod.GET)
+	public String update(@PathVariable("bno") int bno, Model model) {
+		BoardVO vo= boardService.update(bno);
+		model.addAttribute("vo", vo);
+		return "/board/update";
+	}
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	public String update(BoardVO vo) {
+		boardService.update(vo);
+		return "redirect:/board/read/"+vo.getBno();
+	}
+	
 	
 	@RequestMapping(value = "/insert", method = RequestMethod.GET)
 	public String insert() {
@@ -30,7 +45,7 @@ public class Controller {
 	
 	
 	@RequestMapping(value = "/read/{bno}", method = RequestMethod.GET)
-	public String read(@PathVariable("bno") String bno, Model model ) {
+	public String read(@PathVariable("bno") int bno, Model model ) {
 		BoardVO vo = boardService.read(bno);
 		model.addAttribute("vo", vo);
 		return "/board/read";

@@ -21,7 +21,7 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public BoardVO read(String bno) {
+	public BoardVO read(int bno) {
 		// TODO Auto-generated method stub
 		return boardDAO.read(bno);
 	}
@@ -29,6 +29,18 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public void insert(BoardVO vo) {
 		boardDAO.insert(vo);
+		
+	}
+
+	@Override
+	public BoardVO update(int bno) {
+		// TODO Auto-generated method stub
+		return boardDAO.read(bno);
+	}
+
+	@Override
+	public void update(BoardVO vo) {
+		boardDAO.update(vo);
 		
 	}
 

@@ -8,7 +8,11 @@ public interface BoardService {
 
 	public List<BoardVO> list();
 
-	public BoardVO read(String bno);
+	public BoardVO read(int bno);
 
 	public void insert(BoardVO vo);
+
+	public BoardVO update(int bno);
+
+	public void update(BoardVO vo);
 }
