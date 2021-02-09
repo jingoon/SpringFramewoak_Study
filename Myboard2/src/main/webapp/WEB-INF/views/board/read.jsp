@@ -57,6 +57,15 @@
 		$("#read_btn_update").click(function(){
 			location.assign("/board/update/${bno}");
 		});
+		$("#read_btn_delete").click(function(){
+			var deleteConfig = 1234;
+			var inputConfig= prompt("삭제하려면 ["+deleteConfig+"]를 입력하세요");
+			if(inputConfig == deleteConfig){
+				console.log(inputConfig);
+				console.log(deleteConfig);
+				location.assign("/board/delete/${vo.bno}");
+			}
+		});
 		$("#read_btn_list").click(function(){
 			location.assign("/board/list");
 		});

@@ -21,5 +21,8 @@
   		update board set title=#{title}, content=#{content}, writer=#{writer}, updateDate=sysDate 
   		where bno = #{bno}
   	</update>
+  	<delete id="delete">
+  		delete from board where bno = #{bno}
+  	</delete>
   
   </mapper>

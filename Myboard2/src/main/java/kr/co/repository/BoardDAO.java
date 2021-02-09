@@ -10,5 +10,5 @@ public interface BoardDAO {
 	public BoardVO read(int bno);
 	public void insert(BoardVO vo);
 	public void update(BoardVO vo);
-
+	public void delete(int bno);
 }

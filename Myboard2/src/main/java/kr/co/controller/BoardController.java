@@ -18,7 +18,11 @@ public class BoardController {
 	@Autowired
 	BoardService boardService;
 	
-	//delete 할 차례이다!
+	@RequestMapping(value = "/delete/{bno}", method = RequestMethod.GET)
+	public String delete(@PathVariable("bno") int bno) {
+		boardService.delete(bno);
+		return "redirect:/board/list";
+	}
 	
 	@RequestMapping(value = "/update/{bno}", method = RequestMethod.GET)
 	public String update(@PathVariable("bno") int bno, Model model) {
