@@ -37,7 +37,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${list }" var="vo">
+				<c:forEach items="${to.list }" var="vo">
 					<tr>
 						<td>${vo.bno }</td>
 						<td><a href="/board/read/${vo.bno }">${vo.title }</a></td>
@@ -48,10 +48,61 @@
 				</c:forEach>
 			</tbody>
 		</table>
+	</div><!-- row -->
+		<div class="row">
+			<!-- 페이징  -->
+			<nav aria-label="Page navigation">
+				<ul class="pagination">
+					<li class="${to.curPage<=1? 'hidden':'' }">
+						<a href="/board/list/${to.curPage>1? to.curPage-1: '' }" aria-label="Previous"> 
+							<span aria-hidden="true">&laquo;</span>
+						</a>
+					</li>
+					<c:forEach var="page" begin="${to.beginPageNum }" end="${to.stopPageNum}">
+						<li class="${to.curPage==page? 'active': '' }"><a href="/board/list/${page}">${page}</a></li>
+					</c:forEach>
+					<li class="${to.curPage>=to.totalPage? 'hidden' : ''}">
+						<a href="/board/list/${to.curPage<to.totalPage? to.curPage+1: '' }" aria-label="Next">
+							<span aria-hidden="true">&raquo;</span>
+						</a>
+					</li>
+				</ul>
+			</nav>
+
+		</div>
+
+		<div class="row">
+		<div class="input-group">
+			<span class="input-group-addon">
+				<select id="list_select_searchType">
+					<optgroup label="검색조건">
+						<option value="title">제목</option>
+						<option value="writer">작성자</option>
+						<option value="content">내용</option>
+						<option value="all">모두</option>
+					</optgroup>
+				</select>
+			</span>
+			<input id="list_input_keyword" type="text" class="form-control" placeholder="검색어를 입력하세요">
+			<span class="input-group-btn">
+				<button id="list-btn-search" class="btn btn-default" type="button">검색</button>
+			</span>
+		</div>
+		<!-- /input-group -->
 	</div>
 </div><!-- container -->
 
-
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#list-btn-search").click(function() {
+			var searchType = $("#list_select_searchType").val();
+			var keyword = $("#list_input_keyword").val();
+			var curPage = 1;
+			var url = "/sboard/list/"+searchType+"/"+keyword+"/"+curPage;
+			window.open(url);
+		})
+	})
+</script>
 
 
 

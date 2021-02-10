@@ -2,11 +2,13 @@ package kr.co.repository;
 
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.co.domain.BoardVO;
+import kr.co.domain.PageTO;
 
 @Repository
 public class BoardDAOImpl implements BoardDAO{
@@ -17,9 +19,9 @@ public class BoardDAOImpl implements BoardDAO{
 	private final String NS= "kr.co.board";
 	
 	@Override
-	public List<BoardVO> list() {
-		// TODO Auto-generated method stub
-		return sqlSession.selectList(NS+".list");
+	public List<BoardVO> list(PageTO to) {
+		RowBounds rb = new RowBounds(to.getStartNum()-1, to.getPerPage());
+		return sqlSession.selectList(NS+".list", null, rb);
 	}
 
 	@Override
@@ -43,6 +45,12 @@ public class BoardDAOImpl implements BoardDAO{
 	@Override
 	public void delete(int bno) {
 		sqlSession.delete(NS+".delete", bno);
+	}
+
+	@Override
+	public Integer getAmount() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(NS+".getAmount");
 	}
 
 

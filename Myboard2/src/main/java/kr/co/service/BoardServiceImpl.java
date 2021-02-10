@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.domain.BoardVO;
+import kr.co.domain.PageTO;
 import kr.co.repository.BoardDAO;
 
 @Service
@@ -15,9 +16,9 @@ public class BoardServiceImpl implements BoardService{
 	private BoardDAO boardDAO;
 	
 	@Override
-	public List<BoardVO> list() {
+	public List<BoardVO> list(PageTO to) {
 		// TODO Auto-generated method stub
-		return boardDAO.list();
+		return boardDAO.list(to);
 	}
 
 	@Override
@@ -48,6 +49,12 @@ public class BoardServiceImpl implements BoardService{
 	public void delete(int bno) {
 		boardDAO.delete(bno);
 		
+	}
+
+	@Override
+	public Integer getAmount() {
+		// TODO Auto-generated method stub
+		return boardDAO.getAmount();
 	}
 
 }

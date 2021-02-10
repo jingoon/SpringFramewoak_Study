@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import kr.co.domain.BoardVO;
+import kr.co.domain.PageTO;
 import kr.co.service.BoardService;
 
 @org.springframework.stereotype.Controller
@@ -18,6 +19,7 @@ public class BoardController {
 	@Autowired
 	BoardService boardService;
 	
+		
 	@RequestMapping(value = "/delete/{bno}", method = RequestMethod.GET)
 	public String delete(@PathVariable("bno") int bno) {
 		boardService.delete(bno);
@@ -39,6 +41,13 @@ public class BoardController {
 	
 	@RequestMapping(value = "/insert", method = RequestMethod.GET)
 	public String insert() {
+		
+		for (int i = 70; i < 110; i++) {
+			BoardVO vo = new BoardVO(0, "test"+i, "content"+i, "tester"+i);
+			boardService.insert(vo);
+			
+		}
+			
 		return "/board/insert";
 	}
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
@@ -55,10 +64,29 @@ public class BoardController {
 		return "/board/read";
 	}
 	
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public String list(Model model) {
-		List<BoardVO> list = boardService.list();
-		model.addAttribute("list", list);
+	@RequestMapping(value = "/list",method = RequestMethod.GET)
+	public String list() {
+		int curPage = 1;
+		return "redirect:/board/list/"+curPage;
+	}
+	
+	@RequestMapping(value = "/list/{curPage}", method = RequestMethod.GET)
+	public String list(Model model,@PathVariable ("curPage") int curPage ) {
+		Integer amount = boardService.getAmount();
+		if(amount ==null) {
+			amount = 0;
+		}
+		PageTO to = new PageTO(curPage);
+		to.setAmount(amount);
+		if(curPage<1) {
+			return "redirect:/board/list/";
+		}else if(curPage > to.getTotalPage()) {
+			return "redirect:/board/list/"+to.getTotalPage();
+		}
+		List<BoardVO> list = boardService.list(to);
+		to.setList(list);
+	
+		model.addAttribute("to", to);
 		return "/board/list";
 	}
 
