@@ -41,13 +41,6 @@ public class BoardController {
 	
 	@RequestMapping(value = "/insert", method = RequestMethod.GET)
 	public String insert() {
-		
-		for (int i = 70; i < 110; i++) {
-			BoardVO vo = new BoardVO(0, "test"+i, "content"+i, "tester"+i);
-			boardService.insert(vo);
-			
-		}
-			
 		return "/board/insert";
 	}
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
@@ -65,11 +58,10 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value = "/list",method = RequestMethod.GET)
-	public String list() {
+	public String list(Model model) {
 		int curPage = 1;
 		return "redirect:/board/list/"+curPage;
 	}
-	
 	@RequestMapping(value = "/list/{curPage}", method = RequestMethod.GET)
 	public String list(Model model,@PathVariable ("curPage") int curPage ) {
 		Integer amount = boardService.getAmount();
