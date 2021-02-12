@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import kr.co.domain.BoardVO;
 import kr.co.domain.SearchPageTO;
+import kr.co.service.BoardService;
 import kr.co.service.SBoardService;
 
 @Controller
@@ -19,6 +20,24 @@ public class SBoardController {
 
 	@Autowired
 	private SBoardService sBoardService;
+	
+	@Autowired
+	private BoardService boardService;
+	
+	@RequestMapping(value = "/read/{searchType}/{keyword}/{curPage}/{bno}", method = RequestMethod.GET)
+	public String read(@PathVariable("searchType") String searchType,
+						@PathVariable("keyword") String keyword,
+						@PathVariable("curPage") int curPage,
+						@PathVariable("bno")int bno,
+						Model model) {
+		BoardVO vo = boardService.read(bno);
+		model.addAttribute("vo", vo);
+		SearchPageTO spt = new SearchPageTO(searchType, keyword, curPage);
+		model.addAttribute("to", spt);
+		
+		return "/sboard/read";
+	}
+	
 	
 	@RequestMapping(value = "/list/{searchType}/{keyword}/{curPage}", method = RequestMethod.GET)
 	public String list(@PathVariable("searchType") String searchType,

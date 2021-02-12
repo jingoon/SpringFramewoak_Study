@@ -24,3 +24,6 @@ select * from BOARD
 
 insert into BOARD (bno, title, content, writer)
 values (1, 'HELLO', 'HELLO IS ANNYEON', 'KIM')
+
+--------------------------------
+select * from board where lower(writer)  like lower('%kim%')
