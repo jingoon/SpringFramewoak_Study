@@ -1,5 +1,7 @@
 package kr.co.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,26 @@ public class SBoardController {
 	
 	@Autowired
 	private BoardService boardService;
+	
+	@RequestMapping(value = "/delete/{searchType}/{keyword}/{curPage}/{bno}", method = RequestMethod.GET)
+	public String delete(@PathVariable("searchType") String searchType,
+						@PathVariable("keyword") String keyword,
+						@PathVariable("curPage") int curPage,
+						@PathVariable("bno")int bno,
+						Model model) throws UnsupportedEncodingException {
+		boardService.delete(bno);
+		
+		String url = null;
+		StringBuffer sb = new StringBuffer();
+		
+		sb.append(searchType);
+		sb.append("/");
+		sb.append(URLEncoder.encode(keyword, "UTF-8"));
+		sb.append("/");
+		sb.append(curPage);
+		url = sb.toString();
+		return "redirect:/sboard/list/"+url;
+	}
 	
 	@RequestMapping(value = "/read/{searchType}/{keyword}/{curPage}/{bno}", method = RequestMethod.GET)
 	public String read(@PathVariable("searchType") String searchType,
