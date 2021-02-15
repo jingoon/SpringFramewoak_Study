@@ -54,9 +54,10 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		var searchPage = "/${to.searchType}/${to.keyword}/${to.curPage}";
+		var searchPage = "${to.searchType}/${to.keyword}/${to.curPage}";
 		$("#read_btn_update").click(function(){
-			location.assign("/board/update/${bno}");
+			//location.assign("/sboard/update/"+searchPage+"/${vo.bno}");
+			location.assign("/sboard/update/${to.searchType}/${to.keyword}/${to.curPage}/${vo.bno}")
 		});
 		$("#read_btn_delete").click(function(){
 			var deleteConfig = 1234;
@@ -69,7 +70,7 @@
 			}
 		});
 		$("#read_btn_list").click(function(){
-			location.assign("/sboard/list"+searchPage);
+			location.assign("/sboard/list/"+searchPage);
 		});
 	})
 </script>

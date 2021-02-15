@@ -26,6 +26,44 @@ public class SBoardController {
 	@Autowired
 	private BoardService boardService;
 	
+	@RequestMapping(value = "/update/{searchType}/{keyword}/{curPage}/{bno}", method = RequestMethod.GET)
+	public String update(@PathVariable("searchType") String searchType,
+			@PathVariable("keyword") String keyword,
+			@PathVariable("curPage") int curPage,
+			@PathVariable("bno")int bno,
+			Model model) {
+		
+		BoardVO vo = boardService.update(bno);
+		model.addAttribute("vo", vo);
+		SearchPageTO spt = new SearchPageTO(searchType, keyword, curPage);
+		model.addAttribute("spt", spt);
+		return "/sboard/update";
+	}
+	@RequestMapping(value = "/update/{searchType}/{keyword}/{curPage}", method = RequestMethod.POST)
+	public String update(@PathVariable("searchType") String searchType,
+			@PathVariable("keyword") String keyword,
+			@PathVariable("curPage") int curPage,
+			BoardVO vo) throws UnsupportedEncodingException {
+		
+		boardService.update(vo);
+		String url = null;
+		StringBuffer sb = new StringBuffer();
+		
+		sb.append(searchType);
+		sb.append("/");
+		sb.append(URLEncoder.encode(keyword, "UTF-8"));
+		sb.append("/");
+		sb.append(curPage);
+		sb.append("/");
+		sb.append(vo.getBno());
+		
+		url = sb.toString();
+		return "redirect:/sboard/read/"+url;
+	}
+	
+	
+	
+	
 	@RequestMapping(value = "/delete/{searchType}/{keyword}/{curPage}/{bno}", method = RequestMethod.GET)
 	public String delete(@PathVariable("searchType") String searchType,
 						@PathVariable("keyword") String keyword,
@@ -33,7 +71,7 @@ public class SBoardController {
 						@PathVariable("bno")int bno,
 						Model model) throws UnsupportedEncodingException {
 		boardService.delete(bno);
-		
+				
 		String url = null;
 		StringBuffer sb = new StringBuffer();
 		
