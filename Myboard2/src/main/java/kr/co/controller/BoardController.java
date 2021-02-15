@@ -48,7 +48,7 @@ public class BoardController {
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	public String insert(BoardVO vo) {
 		boardService.insert(vo);
-		return "redirect:/board/read/"+vo.getBno();
+		return "redirect:/board/read/1/"+vo.getBno();
 	}
 	
 	
