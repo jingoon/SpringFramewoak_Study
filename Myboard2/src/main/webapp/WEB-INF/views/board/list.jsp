@@ -40,7 +40,7 @@
 				<c:forEach items="${to.list }" var="vo">
 					<tr>
 						<td>${vo.bno }</td>
-						<td><a href="/board/read/${vo.bno }">${vo.title }</a></td>
+						<td><a href="/board/read/${to.curPage }/${vo.bno }">${vo.title }</a></td>
 						<td>${vo.writer }</td>
 						<td>${vo.viewCnt }</td>
 						<td><fmt:formatDate type="date" pattern="yy/MM/dd" value="${vo.updateDate }"/></td>
@@ -79,7 +79,6 @@
 						<option value="title">제목</option>
 						<option value="writer">작성자</option>
 						<option value="content">내용</option>
-						<option value="all">모두</option>
 					</optgroup>
 				</select>
 			</span>

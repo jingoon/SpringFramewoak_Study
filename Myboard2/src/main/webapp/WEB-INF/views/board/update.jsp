@@ -23,7 +23,7 @@
 		<h1 class="jumbotron">게시글 수정</h1>
 	</div>
 	<div class="row">
-		<form action="/board/update" method="post">
+		<form action="/board/update/${curPage }" method="post">
 			<input type="hidden" name="bno" value="${vo.bno }">
 			<div class="form-group">
 				<label for="read_input_title">제목</label>

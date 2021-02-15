@@ -55,7 +55,7 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$("#read_btn_update").click(function(){
-			location.assign("/board/update/${bno}");
+			location.assign("/board/update/${curPage}/${bno}");
 		});
 		$("#read_btn_delete").click(function(){
 			var deleteConfig = 1234;
@@ -63,11 +63,11 @@
 			if(inputConfig == deleteConfig){
 				console.log(inputConfig);
 				console.log(deleteConfig);
-				location.assign("/board/delete/${vo.bno}");
+				location.assign("/board/delete/${curPage}/${vo.bno}");
 			}
 		});
 		$("#read_btn_list").click(function(){
-			location.assign("/board/list");
+			location.assign("/board/list/${curPage}");
 		});
 	})
 </script>

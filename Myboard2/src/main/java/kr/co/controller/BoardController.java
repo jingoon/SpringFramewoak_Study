@@ -26,16 +26,18 @@ public class BoardController {
 		return "redirect:/board/list";
 	}
 	
-	@RequestMapping(value = "/update/{bno}", method = RequestMethod.GET)
-	public String update(@PathVariable("bno") int bno, Model model) {
+	@RequestMapping(value = "/update/{curPage}/{bno}", method = RequestMethod.GET)
+	public String update(@PathVariable("bno") int bno,
+			@PathVariable("curPage") int curPage, Model model) {
 		BoardVO vo= boardService.update(bno);
 		model.addAttribute("vo", vo);
+		model.addAttribute("curPage", curPage);
 		return "/board/update";
 	}
-	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public String update(BoardVO vo) {
+	@RequestMapping(value = "/update/{curPage}", method = RequestMethod.POST)
+	public String update(BoardVO vo, @PathVariable("curPage")int curPage) {
 		boardService.update(vo);
-		return "redirect:/board/read/"+vo.getBno();
+		return "redirect:/board/read/"+curPage+"/"+vo.getBno();
 	}
 	
 	
@@ -50,10 +52,12 @@ public class BoardController {
 	}
 	
 	
-	@RequestMapping(value = "/read/{bno}", method = RequestMethod.GET)
-	public String read(@PathVariable("bno") int bno, Model model ) {
+	@RequestMapping(value = "/read/{curPage}/{bno}", method = RequestMethod.GET)
+	public String read(@PathVariable("bno") int bno,
+			@PathVariable("curPage") int curPage,Model model ) {
 		BoardVO vo = boardService.read(bno);
 		model.addAttribute("vo", vo);
+		model.addAttribute("curPage", curPage);
 		return "/board/read";
 	}
 	
