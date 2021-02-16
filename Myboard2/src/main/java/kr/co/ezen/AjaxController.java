@@ -18,6 +18,9 @@ import kr.co.domain.SearchPageTO;
 @RequestMapping(value = "/ajax")
 public class AjaxController {
 	
+	@RequestMapping(value = "/rest", method = RequestMethod.GET )
+	public void rest() {
+	}
 	
 	@ResponseBody
 	@RequestMapping(value = "/soapList", method = RequestMethod.POST)
