@@ -25,5 +25,29 @@ select * from BOARD
 insert into BOARD (bno, title, content, writer)
 values (1, 'HELLO', 'HELLO IS ANNYEON', 'KIM')
 
---------------------------------
 select * from board where lower(writer)  like lower('%kim%')
+
+--댓글 VO 테이블 생성
+
+create table reply(
+rno number primary key,
+bno number not null,
+replyText varchar2(1000) not null,
+replyer varchar2(30) not null,
+regDate date default sysdate,
+updateDate date default sysdate,
+constraint reply_fk_bno foreign key(bno) references board(bno)
+)
+
+select * from REPLY
+
+
+
+
+
+
+
+
+
+
+
