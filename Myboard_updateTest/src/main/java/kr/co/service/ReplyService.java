@@ -16,5 +16,7 @@ public interface ReplyService {
 
 	List<ReplyVO> list(PageTO<ReplyVO> pt, int bno);
 
+	int delete(Map<String, Object> map);
+
 
 }

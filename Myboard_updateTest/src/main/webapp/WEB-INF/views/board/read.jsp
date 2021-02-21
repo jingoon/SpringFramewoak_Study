@@ -132,8 +132,8 @@
 					+ '					<div class="panel-body">'
 					+ '						<p hidden="">'+obj.replyer+'</p>'
 					+ '						<p>'+obj.replyText+'</p>'
-					+ '						<button data-rno='+obj.rno+' class="btn btn-warning glyphicon glyphicon-edit update " title="수정"></button>'
-					+ '						<button data-rno='+obj.rno+' class="btn btn-danger glyphicon glyphicon-remove delete " title="삭제"></button>'
+					+ '						<button data-rno='+obj.rno+' class="btn btn-warning glyphicon glyphicon-edit reply_update " title="수정"></button>'
+					+ '						<button data-rno='+obj.rno+' class="btn btn-danger glyphicon glyphicon-remove reply_delete " title="삭제"></button>'
 					+ '					</div>'
 					+ '				</div>';
 				}
@@ -149,7 +149,7 @@
 		
 		
 		// 모달창 열기(댓글 수정)
-		$("#reply_List").on("click", ".update", function() {
+		$("#reply_List").on("click", ".reply_update", function() {
 			var rno = $(this).attr("data-rno");
 			var replyText = $(this).prev().text();
 			var replyer = $(this).prev().prev().text();
@@ -179,6 +179,39 @@
 				}
 			});
 		});
+		
+		// 댓글 삭제
+		$("#reply_List").on("click", ".reply_delete", function() {
+			var click = $(this);
+			var rno = $(this).attr("data-rno");
+			var cf = confirm("댓글을 삭제합니다");
+			if(cf){
+				$.ajax({
+					type : 'delete',
+					url : '/reply',
+					headers : {
+						"Content-Type" : "application/json",
+						"X-HTTP-Method-Override" : "delete"
+					},
+					data : JSON.stringify({
+						rno : rno,
+						bno : bno
+					}),
+					dataType : "text",
+					success : function(result) {
+						if(result =="o"){
+							click.parent().parent().remove(); //할아버지 태그부터 쭉 삭제. 댓글목록 갱신을 대신함
+						}else{
+							alert("댓글 삭제 실패");
+						}
+					}
+				});
+
+			}else{
+				console.log("삭제취소");
+			}
+		});
+	
 		
 		
 		

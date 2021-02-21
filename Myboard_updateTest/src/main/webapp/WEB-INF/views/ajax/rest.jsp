@@ -1,3 +1,4 @@
+<%@page import="kr.co.domain.BoardVO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.fasterxml.jackson.databind.ObjectMapper"%>
 <%@page import="kr.co.domain.SearchPageTO"%>
@@ -33,9 +34,9 @@
 <span id="sp4">List 전송</span><br>
 
 <%/* 4 */
-	List<SearchPageTO>list = new ArrayList<SearchPageTO>();
-	list.add(new SearchPageTO("m001", "p001", 1));
-	list.add(new SearchPageTO("m002", "p002", 2));
+	List<SearchPageTO<BoardVO>>list = new ArrayList<SearchPageTO<BoardVO>>();
+	list.add(new SearchPageTO<BoardVO>("m001", "p001", 1));
+	list.add(new SearchPageTO<BoardVO>("m002", "p002", 2));
 	
 	ObjectMapper mapper = new ObjectMapper();
 	String strList = mapper.writeValueAsString(list);

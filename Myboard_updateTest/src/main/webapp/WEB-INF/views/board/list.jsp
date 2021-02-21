@@ -40,7 +40,7 @@
 				<c:forEach items="${to.list }" var="vo">
 					<tr>
 						<td>${vo.bno }</td>
-						<td><a href="/board/read/${to.curPage }/${vo.bno }">${vo.title }</a></td>
+						<td><a href="/board/read/${to.curPage }/${vo.bno }">${vo.title } <span class="${vo.replyCnt == 0 ? 'hidden' : '' }">(${vo.replyCnt == 0 ? '':vo.replyCnt})</span></a></td>
 						<td>${vo.writer }</td>
 						<td>${vo.viewCnt }</td>
 						<td><fmt:formatDate type="date" pattern="yy/MM/dd" value="${vo.updateDate }"/></td>
@@ -92,7 +92,12 @@
 </div><!-- container -->
 
 <script type="text/javascript">
+	
 	$(document).ready(function() {
+		//var to = ${to};
+		
+		//console.log(to)
+		
 		$("#list-btn-search").click(function() {
 			var searchType = $("#list_select_searchType").val();
 			var keyword = $("#list_input_keyword").val();

@@ -43,6 +43,12 @@ public class ReplyDAOImpl implements ReplyDAO{
 		return sqlSession.selectList(NS+".list", bno, rb);
 	}
 
+	@Override
+	public int delete(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return sqlSession.delete(NS+".delete", map);
+	}
+
 	
 
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kr.co.domain.BoardVO;
 import kr.co.domain.PageTO;
@@ -21,9 +22,10 @@ public class BoardServiceImpl implements BoardService{
 		return boardDAO.list(to);
 	}
 
+	@Transactional
 	@Override
 	public BoardVO read(int bno) {
-		// TODO Auto-generated method stub
+		boardDAO.updateViewCnt(bno);
 		return boardDAO.read(bno);
 	}
 

@@ -1,9 +1,11 @@
 package kr.co.repository;
 
 import java.util.List;
+import java.util.Map;
 
 import kr.co.domain.BoardVO;
 import kr.co.domain.PageTO;
+import kr.co.domain.ReplyVO;
 
 public interface BoardDAO {
 	
@@ -13,4 +15,7 @@ public interface BoardDAO {
 	public void update(BoardVO vo);
 	public void delete(int bno);
 	public Integer getAmount();
+	public void updateViewCnt(int bno);
+	public void replyCntPlus(ReplyVO vo);
+	public void replyCntMinus(Map<String, Object> map);
 }

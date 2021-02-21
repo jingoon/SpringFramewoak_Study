@@ -8,6 +8,12 @@ updatedate date default sysdate
 )
 
 select * from member
+
+
+
+
+
+
 -----------------------------
 
 CREATE TABLE  board (
@@ -20,12 +26,18 @@ CREATE TABLE  board (
    viewCnt NUMBER DEFAULT 0
 )
 
-select * from BOARD
+select * from BOARD order by bno desc
 
 insert into BOARD (bno, title, content, writer)
 values (1, 'HELLO', 'HELLO IS ANNYEON', 'KIM')
 
 select * from board where lower(writer)  like lower('%kim%')
+
+--보드테이블 댓글개수 컬럼 추가
+ALTER TABLE BOARD add replyCnt number(4) default 0
+--이미 생성된 댓글의 개수 반영 업데이트
+update BOARD set replyCnt = (select count(rno) from REPLY where bno= BOARD.BNO)
+commit
 
 --댓글 VO 테이블 생성
 

@@ -16,13 +16,12 @@ public class BoardVO implements Serializable{
 	private String writer;
 	private Date regDate;
 	private Date updateDate;
-	private int viewCnt;
+	private int viewCnt;	//조회수
+	private int replyCnt;	//댓글개수
 	
 	public BoardVO() {
 		// TODO Auto-generated constructor stub
 	}
-
-	
 
 	public BoardVO(int bno, String title, String content, String writer, Date regDate, Date updateDate, int viewCnt) {
 		super();
@@ -44,8 +43,28 @@ public class BoardVO implements Serializable{
 		this.content = content;
 		this.writer = writer;
 	}
+	
+	
+	public BoardVO(int bno, String title, String content, String writer, Date regDate, Date updateDate, int viewCnt,
+			int replyCnt) {
+		super();
+		this.bno = bno;
+		this.title = title;
+		this.content = content;
+		this.writer = writer;
+		this.regDate = regDate;
+		this.updateDate = updateDate;
+		this.viewCnt = viewCnt;
+		this.replyCnt = replyCnt;
+	}
 
+	public int getReplyCnt() {
+		return replyCnt;
+	}
 
+	public void setReplyCnt(int replyCnt) {
+		this.replyCnt = replyCnt;
+	}
 
 	public int getBno() {
 		return bno;

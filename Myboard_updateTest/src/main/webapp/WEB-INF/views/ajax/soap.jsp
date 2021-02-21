@@ -1,3 +1,4 @@
+<%@page import="kr.co.domain.BoardVO"%>
 <%@page import="com.fasterxml.jackson.databind.ObjectMapper"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="kr.co.domain.SearchPageTO"%>
@@ -35,10 +36,11 @@
 <span>list 데이터</span>
 <button id="btn4">List 데이터 전송</button><br>
 <%
-	List<SearchPageTO> list = new ArrayList<SearchPageTO>();
-	list.add(new SearchPageTO("타입1","키워드1",1));
-	list.add(new SearchPageTO("타입2","키워드2",2));
-	list.add(new SearchPageTO("타입3","키워드3",3));
+	List<SearchPageTO<BoardVO>> list = new ArrayList<SearchPageTO<BoardVO>>();
+	list.add(new SearchPageTO<BoardVO>("타입1","키워드1",1));
+	list.add(new SearchPageTO<BoardVO>("타입2","키워드2",2));
+	list.add(new SearchPageTO<BoardVO>("타입3","키워드3",3));
+	
 	
 	ObjectMapper mapper = new ObjectMapper();
 	String strList = mapper.writeValueAsString(list);	// String 으로 .. spring의 작업

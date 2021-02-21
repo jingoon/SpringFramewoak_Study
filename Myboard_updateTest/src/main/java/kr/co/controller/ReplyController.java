@@ -22,6 +22,19 @@ public class ReplyController {
 	@Autowired
 	private ReplyService replyService;
 	
+	
+	// 댓글 삭제
+	@RequestMapping(value = "", method = RequestMethod.DELETE)
+	public String delete(@RequestBody Map<String, Object> map) {
+		int i = replyService.delete(map);
+		if(i > 0) {
+			return "o";
+		}else {
+			return "x";
+		}
+		
+	}
+	
 	// 댓글 수정
 	@RequestMapping(value = "", method = RequestMethod.PUT)
 	public String update(@RequestBody Map<String, Object> map) {

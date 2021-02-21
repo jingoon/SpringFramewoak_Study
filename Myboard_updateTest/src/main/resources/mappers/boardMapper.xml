@@ -21,6 +21,18 @@
   		update board set title=#{title}, content=#{content}, writer=#{writer}, updateDate=sysDate 
   		where bno = #{bno}
   	</update>
+  	<update id="updateViewCnt">
+  		update board set viewCnt = viewCnt +1 where bno = #{bno}
+  	</update>
+  	<update id="replyCntMinus">
+  		update board set replyCnt = replyCnt -1 where bno = #{bno}
+  	</update>
+  	<update id="replyCntPlus">
+  		update board set replyCnt = replyCnt +1 where bno = #{bno}
+  	</update>
+  	
+  	
+  	
   	<delete id="delete">
   		delete from board where bno = #{bno}
   	</delete>

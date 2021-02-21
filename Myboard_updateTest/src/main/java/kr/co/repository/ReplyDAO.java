@@ -15,5 +15,7 @@ public interface ReplyDAO {
 	int getAmount(Map<String, Object> map);
 
 	List<ReplyVO> list(PageTO<ReplyVO> pt,int bno);
+
+	int delete(Map<String, Object> map);
 	
 }
