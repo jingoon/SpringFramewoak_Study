@@ -20,7 +20,7 @@ public class BoardController {
 	BoardService boardService;
 	
 		
-	@RequestMapping(value = "/delete/{bno}", method = RequestMethod.GET)
+	@RequestMapping(value = "/delete/{curPage}/{bno}", method = RequestMethod.GET)
 	public String delete(@PathVariable("bno") int bno) {
 		boardService.delete(bno);
 		return "redirect:/board/list";

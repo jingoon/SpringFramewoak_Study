@@ -9,12 +9,16 @@ import org.springframework.transaction.annotation.Transactional;
 import kr.co.domain.BoardVO;
 import kr.co.domain.PageTO;
 import kr.co.repository.BoardDAO;
+import kr.co.repository.ReplyDAO;
 
 @Service
 public class BoardServiceImpl implements BoardService{
 
 	@Autowired
 	private BoardDAO boardDAO;
+	
+	@Autowired
+	private ReplyDAO replyDAO;
 	
 	@Override
 	public List<BoardVO> list(PageTO<BoardVO> to) {
@@ -25,7 +29,7 @@ public class BoardServiceImpl implements BoardService{
 	@Transactional
 	@Override
 	public BoardVO read(int bno) {
-		boardDAO.updateViewCnt(bno);
+		boardDAO.updateViewCnt(bno);	// 추가. viewCnt증가 메서드 호출
 		return boardDAO.read(bno);
 	}
 
@@ -47,8 +51,10 @@ public class BoardServiceImpl implements BoardService{
 		
 	}
 
+	@Transactional
 	@Override
 	public void delete(int bno) {
+		replyDAO.deleteReplies(bno);	// 댓글삭제를 먼저 해준다
 		boardDAO.delete(bno);
 		
 	}

@@ -17,5 +17,7 @@ public interface ReplyDAO {
 	List<ReplyVO> list(PageTO<ReplyVO> pt,int bno);
 
 	int delete(Map<String, Object> map);
+
+	void deleteReplies(int bno);
 	
 }

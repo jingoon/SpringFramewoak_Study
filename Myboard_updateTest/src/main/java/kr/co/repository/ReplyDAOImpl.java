@@ -49,6 +49,14 @@ public class ReplyDAOImpl implements ReplyDAO{
 		return sqlSession.delete(NS+".delete", map);
 	}
 
+	@Override
+	public void deleteReplies(int bno) {
+		sqlSession.delete(NS+".deleteReplies", bno);
+		
+	}
+
+
+
 	
 
 }

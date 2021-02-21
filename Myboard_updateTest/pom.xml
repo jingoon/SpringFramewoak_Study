@@ -15,6 +15,15 @@
 	</properties>
 	<dependencies>
 	
+		<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
+		<!-- AOP준비(트랜젝션+@) -->
+		<dependency>
+		    <groupId>org.aspectj</groupId>
+		    <artifactId>aspectjweaver</artifactId>
+		    <version>${org.aspectj-version}</version>
+		</dependency>
+		
+	
 		<!-- JSON -->
 		<dependency>
 		    <groupId>com.fasterxml.jackson.core</groupId>

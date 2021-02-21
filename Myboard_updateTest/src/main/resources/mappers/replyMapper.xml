@@ -28,5 +28,9 @@
 	<delete id="delete">
 		delete from reply where rno = #{rno}
 	</delete>
+	
+	<delete id="deleteReplies">
+		delete from reply where bno = #{bno}
+	</delete>
 
 </mapper>

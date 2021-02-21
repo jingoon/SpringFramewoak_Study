@@ -25,7 +25,7 @@ public class ReplyServiceImpl implements ReplyService{
 	@Override
 	public void insert(ReplyVO vo) {
 		replyDAO.insert(vo);
-		boardDAO.replyCntPlus(vo);
+		boardDAO.replyCntPlus(vo);		// 댓글개수 증가메서드 호출(@inject DAO)
 	}
 
 	@Override
@@ -49,7 +49,7 @@ public class ReplyServiceImpl implements ReplyService{
 	@Transactional
 	@Override
 	public int delete(Map<String, Object> map) {
-		boardDAO.replyCntMinus(map);
+		boardDAO.replyCntMinus(map);	
 		return replyDAO.delete(map);
 	}
 
