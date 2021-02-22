@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import kr.co.util.FileUploadDownloadUtils;
+
 @Controller
 public class TestUploadController {
 
@@ -27,16 +29,12 @@ public class TestUploadController {
 		// realPath 찾기
 		String uploadPath = session.getServletContext().getRealPath(this.uploadPath);
 
-		// 유일 파일네임 생성
-		String fileName = file.getOriginalFilename();
-		UUID uid = UUID.randomUUID();
-		String savedName = uid.toString()+"_"+fileName;
-		
-		// 날짜별 폴더 생성
+		// 유일 파일네임 생성(메서드
+		String savedName = FileUploadDownloadUtils.makeName(file.getOriginalFilename());
 		
 		// 파일 저장
-		File target = new File(uploadPath, savedName);
-		FileCopyUtils.copy(file.getBytes(), target);
+		FileUploadDownloadUtils.upload(file,uploadPath,savedName );
+
 		
 		
 	}
