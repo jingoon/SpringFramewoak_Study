@@ -15,13 +15,23 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 </head>
 <body>
-
- <h1>upload test</h1>
-<form action="uploadTest" enctype="multipart/form-data" method="post">
+<hr>
+	<h1>test</h1>
+	<form id="form1" target="zeroFrame" action="uploadNoAjax" enctype="multipart/form-data" method="post">
 	<input name="id"><br>
 	<input name="file" type="file"><br>
 	<input type="submit"><br>
-</form> 
+</form>	
 
+<iframe name="zeroFrame"></iframe>
+
+
+<script type="text/javascript">
+	function noAjax(msg) {
+		alert(msg);
+		document.getElementById("form1").reset();
+	}
+
+</script>
 </body>
 </html>

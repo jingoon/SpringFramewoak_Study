@@ -15,13 +15,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 </head>
 <body>
+zz
+<script type="text/javascript">
+	parent.noAjax("test");
 
- <h1>upload test</h1>
-<form action="uploadTest" enctype="multipart/form-data" method="post">
-	<input name="id"><br>
-	<input name="file" type="file"><br>
-	<input type="submit"><br>
-</form> 
+</script>
 
 </body>
 </html>
