@@ -1,10 +1,15 @@
 package kr.co.util;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.UUID;
 
+import javax.imageio.ImageIO;
+
+import org.imgscalr.Scalr;
+import org.springframework.http.MediaType;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -52,12 +57,50 @@ public class FileUploadDownloadUtils {
 		
 	}
 
-	// 업로드
-	public static void upload(MultipartFile file, String uploadPath, String savedName) throws Exception {
+	// 파일 업로드 및 데이터 가공
+	public static String upload(MultipartFile file, String uploadPath) throws Exception {
+		// -----------  파일 업로드
+		String savedName = file.getOriginalFilename();
 		String datePath= calcPath(uploadPath);
 		File target = new File(uploadPath+datePath, savedName);
 		FileCopyUtils.copy(file.getBytes(), target);
-	
+		
+		// ----------- 썸네일 
+		// 확장명 추출
+		String type = savedName.substring(savedName.lastIndexOf(".")+1);
+		// 이미지 구분
+		MediaType mType = MediaUtils.getMediaType(type);
+		
+		// 이미지 구분 및 썸네일 생성
+		String uploadFileName ="";
+		if(mType != null) {
+			uploadFileName = FileUploadDownloadUtils.makeThumnail(uploadPath, datePath, savedName, type);
+		}else {
+			uploadFileName = (datePath+savedName).replace(File.separatorChar, '/');
+		}
+		
+		return uploadFileName;
+		
+	}
+
+	// 썸네일 생성
+	private static String makeThumnail(String uploadPath, String datePath, String savedName, String type) throws Exception {
+		// 원본파일 객체
+		File oriFile = new File(uploadPath+datePath, savedName);	//원본파일 객체
+		// 썸네일 버퍼이미지 (더블버퍼링 기술)
+		BufferedImage copyImg = ImageIO.read(oriFile);		// 1. 원본 이미지를 버퍼에 복사
+		BufferedImage reSizingIng = Scalr.resize(copyImg, Scalr.Method.AUTOMATIC, Scalr.Mode.FIT_EXACT, 100);	// 2. 이미지 리사이즈
+		// 썸네일 파일 객체(경로)
+		String thumbNailPath =uploadPath+datePath+File.separator+"s_"+savedName;
+		File thumbNail = new File(thumbNailPath);
+		
+		// 썸네일 성성(버퍼, 확장자, 파일객체)
+		ImageIO.write(reSizingIng, type, thumbNail);
+		
+		// view에 보내줄 썸네일 상대 경로 ( \(역슬래시)를 /(슬래시)로 변환 )
+		String thumbNailName = thumbNailPath.substring(uploadPath.length()).replace(File.separatorChar, '/');
+		
+		return thumbNailName;
 	}
 	
 	

@@ -1,9 +1,5 @@
 package kr.co.ezen;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.UUID;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
@@ -26,8 +22,7 @@ public class TestUploadController {
 	public String uploadNoAjax(MultipartHttpServletRequest request, HttpSession session) throws Exception {
 		MultipartFile file = request.getFile("file");
 		String uploadpath= session.getServletContext().getRealPath(this.uploadPath);
-		String sevedName = FileUploadDownloadUtils.makeName(file.getOriginalFilename());
-		FileUploadDownloadUtils.upload(file, uploadpath, sevedName);
+		FileUploadDownloadUtils.upload(file, uploadpath);
 		return "uploadResult";
 	}
 	@RequestMapping(value = "/uploadNoAjax", method = RequestMethod.GET)
@@ -38,15 +33,13 @@ public class TestUploadController {
 	@RequestMapping(value = "/uploadTest", method = RequestMethod.POST)
 	public void uploadTest(MultipartHttpServletRequest request, HttpSession session) throws Exception {
 		String id = request.getParameter("id");
+		System.out.println(id);
 		MultipartFile file= request.getFile("file");
 		// realPath 찾기
 		String uploadPath = session.getServletContext().getRealPath(this.uploadPath);
-
-		// 유일 파일네임 생성(메서드
-		String savedName = FileUploadDownloadUtils.makeName(file.getOriginalFilename());
 		
-		// 파일 저장
-		FileUploadDownloadUtils.upload(file,uploadPath,savedName );
+		// 파일저장 + 유일네임 생성
+		FileUploadDownloadUtils.upload(file,uploadPath);
 		
 	}
 	
