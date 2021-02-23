@@ -60,7 +60,7 @@ public class FileUploadDownloadUtils {
 	// 파일 업로드 및 데이터 가공
 	public static String upload(MultipartFile file, String uploadPath) throws Exception {
 		// -----------  파일 업로드
-		String savedName = file.getOriginalFilename();
+		String savedName = makeName(file.getOriginalFilename());
 		String datePath= calcPath(uploadPath);
 		File target = new File(uploadPath+datePath, savedName);
 		FileCopyUtils.copy(file.getBytes(), target);
@@ -76,10 +76,10 @@ public class FileUploadDownloadUtils {
 		if(mType != null) {
 			uploadFileName = FileUploadDownloadUtils.makeThumnail(uploadPath, datePath, savedName, type);
 		}else {
-			uploadFileName = (datePath+savedName).replace(File.separatorChar, '/');
+			uploadFileName = datePath+savedName;
 		}
-		
-		return uploadFileName;
+		// 반환하는 상대 경로의 역슬래시(\)를 슬래시(/)로 변환
+		return uploadFileName.replace(File.separatorChar, '/');
 		
 	}
 
@@ -97,8 +97,8 @@ public class FileUploadDownloadUtils {
 		// 썸네일 성성(버퍼, 확장자, 파일객체)
 		ImageIO.write(reSizingIng, type, thumbNail);
 		
-		// view에 보내줄 썸네일 상대 경로 ( \(역슬래시)를 /(슬래시)로 변환 )
-		String thumbNailName = thumbNailPath.substring(uploadPath.length()).replace(File.separatorChar, '/');
+		// view에 보내줄 썸네일 상대 경로
+		String thumbNailName = thumbNailPath.substring(uploadPath.length());
 		
 		return thumbNailName;
 	}

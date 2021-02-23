@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -16,6 +17,26 @@ public class TestUploadController {
 
 	@Resource(name = "uploadPath")
 	private String uploadPath;
+	
+	
+	// ajax를 이용한 파일 업로드
+	@ResponseBody
+	@RequestMapping(value = "ajaxtest"
+					, method = RequestMethod.POST
+					, produces = "application/text;charset=utf-8")	// 반환 String이 깨질때
+	public String ajaxtest(MultipartHttpServletRequest request, HttpSession session) throws Exception {
+		MultipartFile file = request.getFile("file");
+		String realPath = session.getServletContext().getRealPath(uploadPath);
+		String uploadFileName= FileUploadDownloadUtils.upload(file, realPath);
+		
+		return uploadFileName;
+	}
+	
+	@RequestMapping(value = "ajaxtest", method = RequestMethod.GET)
+	public void ajaxtest() {
+		
+	}
+	
 	
 	// 파일 업로드 (iframe을 이용해서 비동기화 통신처럼)
 	@RequestMapping(value = "/uploadNoAjax", method = RequestMethod.POST)
