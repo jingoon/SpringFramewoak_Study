@@ -76,7 +76,7 @@ public class FileUploadDownloadUtils {
 		if(mType != null) {
 			uploadFileName = FileUploadDownloadUtils.makeThumnail(uploadPath, datePath, savedName, type);
 		}else {
-			uploadFileName = datePath+savedName;
+			uploadFileName = datePath+File.separator+savedName;
 		}
 		// 반환하는 상대 경로의 역슬래시(\)를 슬래시(/)로 변환
 		return uploadFileName.replace(File.separatorChar, '/');

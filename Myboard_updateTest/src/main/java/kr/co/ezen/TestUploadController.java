@@ -28,7 +28,7 @@ public class TestUploadController {
 		MultipartFile file = request.getFile("file");
 		String realPath = session.getServletContext().getRealPath(uploadPath);
 		String uploadFileName= FileUploadDownloadUtils.upload(file, realPath);
-		
+		System.out.println(uploadFileName);
 		return uploadFileName;
 	}
 	

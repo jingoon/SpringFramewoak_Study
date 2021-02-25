@@ -13,6 +13,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+<script src="/resources/js/ajaxUpload.js" type="text/javascript"></script>
 <style type="text/css">
 	.fileDrop{
 		width: 100%;
@@ -30,6 +31,7 @@
 
 <script type="text/javascript">
 	$(document).ready(function() {
+		
 		$(".fileDrop").on("dragenter dragover", function(e) {
 			e.preventDefault();
 		})
@@ -50,15 +52,7 @@
 				dataType : 'text',
 				success : function(data) {
 					console.log(data);
-					var str ="";
-					var name = getFileName(data);
-					if(checkIme(data)){
-						str += "<div><img src='/resources/upload"+data+"'></div>"
-							+ "<p>"+name+"</p>"
-					}else{
-						str += "<div><img src='/resources/upload/cat.png'></div>"
-							+ "<p>"+name+"</p>"
-					}
+					var str = uploadImage(data);					
 					$(".uploadList").append(str);
 				}
 			});
@@ -66,21 +60,7 @@
 			
 		})
 		
-		// 이미지파일 여부
-		function checkIme(data) {
-			var type = data.substring(data.lastIndexOf(".")+1).toUpperCase();
-			if(type == "JPG" || type == "JPEG" || type == "PNG" || type == "GIF"){
-				return true;
-			}else{
-				return false;
-			}
-		}
 		
-		// 업로드 파일 이름
-		function getFileName(data) {
-			var name = data.substring(data.lastIndexOf("_")+1);
-			return name;
-		}
 
 		
 		
