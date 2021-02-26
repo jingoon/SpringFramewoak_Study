@@ -7,6 +7,7 @@ import java.util.Calendar;
 import java.util.UUID;
 
 import javax.imageio.ImageIO;
+import javax.servlet.http.HttpSession;
 
 import org.imgscalr.Scalr;
 import org.springframework.http.MediaType;
@@ -101,6 +102,17 @@ public class FileUploadDownloadUtils {
 		String thumbNailName = thumbNailPath.substring(uploadPath.length());
 		
 		return thumbNailName;
+	}
+
+	// 절대경로 메서드 반환
+	public static String getRealPath(String uploadPath, HttpSession session) {
+		
+		return session.getServletContext().getRealPath(uploadPath);
+	}
+	
+	// 파일 구분자 변환
+	public static String changeFileseparator(String path) {
+		return path.replace(File.separatorChar, '/');
 	}
 	
 	

@@ -20,4 +20,7 @@ public class MediaUtils {
 		
 		return map.get(type.toUpperCase());
 	}
+	public static String getType(String fileLink) {
+		return fileLink.substring(fileLink.lastIndexOf(".")+1);
+	}
 }

@@ -39,6 +39,11 @@
 			</div>
 		</form>
 		
+<!-- 첨부 파일 -->		
+		<div id="fileUI" class="form-group hidden-xs"><!-- 폰에서는 안보임  -->
+			<jsp:include page="/WEB-INF/views/file/fileUI.jsp"></jsp:include>
+		</div>
+		
 			<div class="form-group">
 				<button type="submit" class="btn btn-primary" id="insert_btn_submit">완료</button>
 				<button class="btn btn-default" id="insert_btn_back">취소</button>

@@ -13,7 +13,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
-<script src="/resources/js/ajaxUpload.js" type="text/javascript"></script>
+
+<script src="/resources/js/fileIOUpload.js" type="text/javascript"></script>
+
 <style type="text/css">
 	.fileDrop{
 		width: 100%;
@@ -24,13 +26,11 @@
 		list-style: none;
 	}
 </style>
+
 </head>
 <body>
-
-<h1>ajax를 이용한 파일 업로드</h1>
-
 <!-- 첨부 파일 -->
-		<div class="form-group">
+		
 			<label>업로드할 파일을 드랍하세요</label>
 			<div class="fileDrop">
 			
@@ -38,7 +38,7 @@
 			<ul class="clearfix uploadList">
 				
 			</ul>
-		</div>
+
 
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -57,7 +57,7 @@
 			formData.append("file", file);
 			$.ajax({
 				type : 'post',
-				url : 'ajaxtest',
+				url : '/ajaxtest',
 				processData : false,
 				contentType : false,
 				data : formData,
@@ -67,9 +67,7 @@
 				}
 			});
 		})
-		
-		
-		
+	
 	});
 </script>
 </body>
