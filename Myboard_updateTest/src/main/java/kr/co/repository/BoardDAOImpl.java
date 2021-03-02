@@ -1,5 +1,6 @@
 package kr.co.repository;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -69,6 +70,15 @@ public class BoardDAOImpl implements BoardDAO{
 	@Override
 	public void replyCntMinus(Map<String, Object> map) {
 		sqlSession.update(NS+".replyCntMinus", map);
+		
+	}
+
+	@Override
+	public void addAttach(String file, int bno) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("fullName", file);
+		map.put("bno", bno);
+		sqlSession.insert(NS+".addAttach", map);
 		
 	}
 

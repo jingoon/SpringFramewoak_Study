@@ -33,9 +33,20 @@ public class BoardServiceImpl implements BoardService{
 		return boardDAO.read(bno);
 	}
 
+	@Transactional
 	@Override
 	public void insert(BoardVO vo) {
+		
 		boardDAO.insert(vo);
+
+		// 업로드 파일 목록 DB저장
+System.out.println(vo.getFiles());
+		if(vo.getFiles() == null) {
+			return;
+		}
+		for (String file : vo.getFiles()) {
+			boardDAO.addAttach(file, vo.getBno());
+		}
 		
 	}
 

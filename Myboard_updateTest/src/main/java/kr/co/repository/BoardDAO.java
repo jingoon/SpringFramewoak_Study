@@ -18,4 +18,5 @@ public interface BoardDAO {
 	public void updateViewCnt(int bno);
 	public void replyCntPlus(ReplyVO vo);
 	public void replyCntMinus(Map<String, Object> map);
+	public void addAttach(String file, int bno);
 }

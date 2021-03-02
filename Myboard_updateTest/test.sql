@@ -53,7 +53,17 @@ constraint reply_fk_bno foreign key(bno) references board(bno)
 
 select * from REPLY
 
+--- 업로드 파일에 대한 테이블
+create table attach(
+id number(8) primary key,
+fullName varchar2(200) not null,
+bno number(6),
+regdate date default sysdate,
+constraint fk_attach_bno foreign key(bno) references board(bno)
+ON DELETE CASCADE
+)
 
+select * from attach
 
 
 

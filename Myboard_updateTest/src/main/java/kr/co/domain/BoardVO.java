@@ -18,6 +18,7 @@ public class BoardVO implements Serializable{
 	private Date updateDate;
 	private int viewCnt;	//조회수
 	private int replyCnt;	//댓글개수
+	private String[] files;	//업로드 파일
 	
 	public BoardVO() {
 		// TODO Auto-generated constructor stub
@@ -33,8 +34,23 @@ public class BoardVO implements Serializable{
 		this.updateDate = updateDate;
 		this.viewCnt = viewCnt;
 	}
+	
 
 
+
+	public BoardVO(int bno, String title, String content, String writer, Date regDate, Date updateDate, int viewCnt,
+			int replyCnt, String[] files) {
+		super();
+		this.bno = bno;
+		this.title = title;
+		this.content = content;
+		this.writer = writer;
+		this.regDate = regDate;
+		this.updateDate = updateDate;
+		this.viewCnt = viewCnt;
+		this.replyCnt = replyCnt;
+		this.files = files;
+	}
 
 	public BoardVO(int bno, String title, String content, String writer) {
 		super();
@@ -56,6 +72,16 @@ public class BoardVO implements Serializable{
 		this.updateDate = updateDate;
 		this.viewCnt = viewCnt;
 		this.replyCnt = replyCnt;
+	}
+	
+	
+
+	public String[] getFiles() {
+		return files;
+	}
+
+	public void setFiles(String[] files) {
+		this.files = files;
 	}
 
 	public int getReplyCnt() {

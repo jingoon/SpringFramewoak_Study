@@ -21,6 +21,14 @@
   		update board set title=#{title}, content=#{content}, writer=#{writer}, updateDate=sysDate 
   		where bno = #{bno}
   	</update>
+  	<delete id="delete">
+  		delete from board where bno = #{bno}
+  	</delete>
+  	<select id="getAmount" resultType="Integer">
+  		select count(bno) from board
+  	</select>
+  	
+  	<!-- 댓글  -->
   	<update id="updateViewCnt">
   		update board set viewCnt = viewCnt +1 where bno = #{bno}
   	</update>
@@ -30,14 +38,11 @@
   	<update id="replyCntPlus">
   		update board set replyCnt = replyCnt +1 where bno = #{bno}
   	</update>
-  	
-  	
-  	
-  	<delete id="delete">
-  		delete from board where bno = #{bno}
-  	</delete>
-  	<select id="getAmount" resultType="Integer">
-  		select count(bno) from board
-  	</select>
+
+  	<!-- 파일 정보 저장 -->
+  	<insert id="addAttach">
+  		insert into attach (id,fullName, bno) 
+  		values ((select nvl2(max(id),max(id)+1, 1) from attach),#{fullName}, #{bno})
+  	</insert>
   
   </mapper>

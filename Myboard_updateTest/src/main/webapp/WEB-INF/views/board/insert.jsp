@@ -35,7 +35,7 @@
 			</div>
 			<div class="form-group">
 				<label for="insert_input_content">내용</label>
-				<textarea class="form-control" rows="10" id="insert_input_content" name="content"></textarea>
+				<textarea class="form-control" rows="10" id="insert_input_content" name="content" required="required"></textarea>
 			</div>
 		</form>
 		
@@ -56,6 +56,15 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 	 	$("#insert_btn_submit").click(function(){
+	 		// 업로드 파일 전부 append
+	 		var str="";
+	 		$(".deleteFile").each(function(index){
+	 			var that = $(this);
+	 			var data = that.attr("data-src");
+	 			str += "<input type='hidden' name='files["+index+"]' value='"+data+"' >";
+	 		});
+	 			 		
+	 		$("form").append(str);
 			$("form").submit();
 		}); 
 			
