@@ -82,5 +82,11 @@ public class BoardDAOImpl implements BoardDAO{
 		
 	}
 
+	@Override
+	public List<String> getAttach(int bno) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(NS+".getAttach", bno);
+	}
+
 
 }

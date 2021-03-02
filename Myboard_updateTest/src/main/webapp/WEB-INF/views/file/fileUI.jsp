@@ -14,7 +14,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 
-<script src="/resources/js/fileIOUpload.js" type="text/javascript"></script>
+<script src="/resources/js/fileIOUpload.js?vs=0.1" type="text/javascript"></script>
 
 <style type="text/css">
 	.fileDrop{
@@ -34,8 +34,8 @@
 <body>
 <!-- 첨부 파일 -->
 		
-			<label>업로드할 파일을 드랍하세요</label>
-			<div class="fileDrop">
+			<label class="fileInsert">업로드할 파일을 드랍하세요</label>
+			<div class="fileDrop fileInsert">
 			
 			</div>
 			<ul class="clearfix uploadList">
@@ -45,7 +45,7 @@
 
 <script type="text/javascript">
 	$(document).ready(function() {
-		
+			
 		// 기존 이벤트 막기
 		$(".fileDrop").on("dragenter dragover", function(e) {
 			e.preventDefault();

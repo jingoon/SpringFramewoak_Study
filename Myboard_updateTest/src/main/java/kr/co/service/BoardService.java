@@ -20,4 +20,6 @@ public interface BoardService {
 	public void delete(int bno);
 
 	public Integer getAmount();
+
+	public List<String> getAttach(int bno);
 }

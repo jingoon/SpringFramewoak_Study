@@ -40,7 +40,6 @@ public class BoardServiceImpl implements BoardService{
 		boardDAO.insert(vo);
 
 		// 업로드 파일 목록 DB저장
-System.out.println(vo.getFiles());
 		if(vo.getFiles() == null) {
 			return;
 		}
@@ -74,6 +73,12 @@ System.out.println(vo.getFiles());
 	public Integer getAmount() {
 		// TODO Auto-generated method stub
 		return boardDAO.getAmount();
+	}
+
+	@Override
+	public List<String> getAttach(int bno) {
+		// TODO Auto-generated method stub
+		return boardDAO.getAttach(bno);
 	}
 
 }

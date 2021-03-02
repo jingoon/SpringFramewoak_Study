@@ -41,6 +41,11 @@
 				<textarea class="form-control" rows="10" name="content"
 					id="read_input_content" readonly>${vo.content}</textarea>
 			</div>
+<!-- 첨부 파일 -->		
+			<div id="fileUI_read" class="form-group hidden-xs"><!-- 폰에서는 안보임  -->
+				<jsp:include page="/WEB-INF/views/file/fileUI.jsp"></jsp:include>
+			</div>
+			
 			<div class="form-group">
 				<button id="read_btn_update" class="btn btn-warning">수정</button>
 				<button id="read_btn_delete" class="btn btn-danger">삭제</button>
@@ -107,6 +112,12 @@
 		// 글보기 view 출력과 동시에 댓글리스트 함수 실행
 		replyList(bno, curPage);
 		
+		// 파일 드랍 레이블과 영역 숨기기
+		hiddenInsert();
+		
+		// 업로드 파일 목록 획득
+		uploadFileList(bno);
+				
 		//댓글 리셋 함수
 		function replyReset() {
 			$("#replyer").val("");

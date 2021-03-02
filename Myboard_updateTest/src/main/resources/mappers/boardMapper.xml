@@ -39,10 +39,13 @@
   		update board set replyCnt = replyCnt +1 where bno = #{bno}
   	</update>
 
-  	<!-- 파일 정보 저장 -->
+  	<!-- 파일 -->
   	<insert id="addAttach">
   		insert into attach (id,fullName, bno) 
   		values ((select nvl2(max(id),max(id)+1, 1) from attach),#{fullName}, #{bno})
   	</insert>
+  	<select id="getAttach" resultType="string">
+  		select fullName from attach where bno= #{bno}
+  	</select>
   
   </mapper>

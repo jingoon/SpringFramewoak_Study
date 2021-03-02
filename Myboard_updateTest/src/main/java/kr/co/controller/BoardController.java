@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.domain.BoardVO;
 import kr.co.domain.PageTO;
@@ -18,6 +19,14 @@ public class BoardController {
 	
 	@Autowired
 	BoardService boardService;
+	
+	// 파일 목록
+	@ResponseBody
+	@RequestMapping(value = "/getAttach/{bno}", method = RequestMethod.GET)
+	public List<String> getAttach(@PathVariable("bno") int bno) {
+		List<String>list =  boardService.getAttach(bno);
+		return list;
+	}
 	
 		
 	@RequestMapping(value = "/delete/{curPage}/{bno}", method = RequestMethod.GET)
