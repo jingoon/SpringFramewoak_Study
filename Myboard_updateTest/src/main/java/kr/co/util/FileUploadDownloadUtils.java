@@ -104,14 +104,17 @@ public class FileUploadDownloadUtils {
 		return thumbNailName;
 	}
 
-	// 절대경로 메서드 반환
+	// 파일경로 메서드 반환
 	public static String getRealPath(String uploadPath, HttpSession session) {
 		
 		return session.getServletContext().getRealPath(uploadPath);
 	}
 	
 	// 파일 구분자 변환
-	public static String changeFileseparator(String path) {
+	public static String changeToFileseparator(String path) {
+		return path.replace('/', File.separatorChar);
+	}
+	public static String changeTOWebseparator(String path) {
 		return path.replace(File.separatorChar, '/');
 	}
 	

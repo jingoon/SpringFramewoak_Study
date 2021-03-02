@@ -16,11 +16,19 @@ public class MediaUtils {
 		map.put("GIF", MediaType.IMAGE_GIF);
 	}
 	
+	// 미디어타입 반환
 	public static MediaType getMediaType(String type) {
 		
 		return map.get(type.toUpperCase());
 	}
+	// 이미지 타입 추출
 	public static String getType(String fileLink) {
 		return fileLink.substring(fileLink.lastIndexOf(".")+1);
 	}
+	// 이미지타입 추출 후 미디어타입 반환
+	public static MediaType getLinkToMediaType(String fileLink) {
+		String type = fileLink.substring(fileLink.lastIndexOf(".")+1);
+		return map.get(type.toUpperCase());
+	}
+	
 }

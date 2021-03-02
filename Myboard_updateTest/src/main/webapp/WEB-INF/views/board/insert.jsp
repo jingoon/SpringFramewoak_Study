@@ -60,6 +60,12 @@
 		}); 
 			
 		$("#insert_btn_back").click(function(){
+			// 업로드 파일 전부 삭제
+			$(".deleteFile").each(function(index) {
+				var that = $(this);
+				deleteFile(that);
+				
+			});
 			history.back();
 		})	
 	})

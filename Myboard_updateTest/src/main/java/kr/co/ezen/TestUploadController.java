@@ -1,5 +1,6 @@
 package kr.co.ezen;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 
@@ -26,6 +27,36 @@ public class TestUploadController {
 
 	@Resource(name = "uploadPath")
 	private String uploadPath;
+	
+	
+	// 업로드 파일 삭제(서버 파일)
+	@ResponseBody	// 데이터
+	@RequestMapping(value = "/deleteFile", method = RequestMethod.POST)
+	public boolean deleteFile(String sFileLink, HttpSession session) {
+		boolean ok = false;
+		// 파일 구분자 변경 
+		sFileLink = FileUploadDownloadUtils.changeToFileseparator(sFileLink);
+		// 경로 조합 메서드
+		String realPath = FileUploadDownloadUtils.getRealPath(uploadPath, session);
+		// 경로 + 받은 데이터로 파일 객체 생성
+		File sFile = new File(realPath+sFileLink);
+		// 파일 삭제
+		ok = sFile.delete();
+		// 확장자 추출 및 미디어타입확인 메서드 호출
+		MediaType mType = MediaUtils.getLinkToMediaType(sFileLink);
+		// 썸네일이 삭제 성공이고 이미지 파일이면 원본파일 삭제
+		if(mType != null && ok) {
+			// 이미지 타입이 있으면 삭제된건 썸네일이므로 원본파일이름을 추출하여 마저 삭제
+			String pre= sFileLink.substring(0, 12);
+			String suf= sFileLink.substring(14);
+			File file = new File(realPath+pre+suf);
+			ok = file.delete();
+		}
+		
+		return ok;
+	}
+	
+	
 	
 	// 원본파일 새창열기, 기타파일 다운로드
 	@ResponseBody

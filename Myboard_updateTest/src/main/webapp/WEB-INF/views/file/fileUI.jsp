@@ -25,6 +25,9 @@
 	.uploadList{
 		list-style: none;
 	}
+	.deleteFile{
+		cursor: pointer;
+	}
 </style>
 
 </head>
@@ -67,6 +70,12 @@
 				}
 			});
 		})
+		
+		// 파일 삭제
+		$(".uploadList").on("click", ".deleteFile", function() {
+			var that = $(this);
+			deleteFile(that)
+		});
 	
 	});
 </script>

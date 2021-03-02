@@ -10,12 +10,32 @@ function uploadImage(data){
 	`<li class="col-xs-3">
 		<div>
 			<a ${downOrWindow} href="/displyFile?fileLink=${Link}"><img src="${thumbnail}"></a>
-			<p><span></span>${name}</p>
+			<p><span data-src="${data}" class="glyphicon glyphicon-trash deleteFile" aria-hidden="true"></span>${name}</p>
 		</div>
 	</li>`;
 	return str;
 }
 
+
+// 파일 삭제 함수
+function deleteFile(that){
+	var sFileLink = that.attr("data-src");
+	$.ajax({
+		type : 'post',
+		url : '/deleteFile',
+		data : {
+			sFileLink : sFileLink
+		},
+		dataType : 'text',
+		success : function(result){
+			if(result){
+				that.parent().parent().parent().remove();
+			}else{
+				alert("삭제 실패");
+			}
+		}
+	});
+}
 // 다운로드와 새창 열기(IO)
 function downloadOrNewWindow(data){
 	if(checkImage(data)){
