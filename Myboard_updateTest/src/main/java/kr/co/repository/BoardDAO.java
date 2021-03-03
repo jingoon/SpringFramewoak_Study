@@ -20,4 +20,5 @@ public interface BoardDAO {
 	public void replyCntMinus(Map<String, Object> map);
 	public void addAttach(String file, int bno);
 	public List<String> getAttach(int bno);
+	public void deleteAttach(String file, int bno);
 }

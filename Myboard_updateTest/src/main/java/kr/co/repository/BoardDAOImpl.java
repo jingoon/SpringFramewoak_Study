@@ -88,5 +88,14 @@ public class BoardDAOImpl implements BoardDAO{
 		return sqlSession.selectList(NS+".getAttach", bno);
 	}
 
+	@Override
+	public void deleteAttach(String file, int bno) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("fullName", file);
+		map.put("bno", bno);
+		sqlSession.delete(NS+".deleteAttach", map);
+		
+	}
+
 
 }

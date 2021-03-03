@@ -48,17 +48,36 @@ public class BoardServiceImpl implements BoardService{
 		}
 		
 	}
-
+	
 	@Override
 	public BoardVO update(int bno) {
-		// TODO Auto-generated method stub
-		return boardDAO.read(bno);
+		BoardVO vo = boardDAO.read(bno);
+		return vo;
 	}
-
+	
+	@Transactional
 	@Override
 	public void update(BoardVO vo) {
 		boardDAO.update(vo);
 		
+		// 해당 글 DB파일 목록
+		List<String> list = boardDAO.getAttach(vo.getBno());
+		// 해당글 파일 전부 삭제
+		for (int i = 0; i < list.size(); i++) {
+			boardDAO.deleteAttach(list.get(i), vo.getBno());
+		}
+		
+		// 수정된 파일목록
+		String[] newFiles = vo.getFiles();
+		// 수정 파일 없으면 종료
+		if(newFiles == null) {
+			return;
+		}
+		// 수정 파일 전부 저장
+		for (String file : newFiles) {
+			boardDAO.addAttach(file, vo.getBno());
+		}
+				
 	}
 
 	@Transactional

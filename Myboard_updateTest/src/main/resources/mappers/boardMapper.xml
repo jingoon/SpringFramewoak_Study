@@ -47,5 +47,8 @@
   	<select id="getAttach" resultType="string">
   		select fullName from attach where bno= #{bno}
   	</select>
+  	<delete id="deleteAttach">
+  		delete from attach where fullName=#{fullName} and bno=#{bno}
+  	</delete>
   
   </mapper>

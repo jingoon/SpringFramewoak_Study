@@ -14,7 +14,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 
-<script src="/resources/js/fileIOUpload.js?vs=0.1" type="text/javascript"></script>
+<script src="/resources/js/fileIOUpload.js?vs=0.12" type="text/javascript"></script>
 
 <style type="text/css">
 	.fileDrop{
@@ -71,12 +71,6 @@
 			});
 		})
 		
-		// 파일 삭제
-		$(".uploadList").on("click", ".deleteFile", function() {
-			var that = $(this);
-			deleteFile(that)
-		});
-	
 	});
 </script>
 </body>

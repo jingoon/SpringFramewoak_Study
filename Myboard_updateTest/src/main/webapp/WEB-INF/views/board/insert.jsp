@@ -76,7 +76,12 @@
 				
 			});
 			history.back();
-		})	
+		})
+		// 파일 삭제
+		$(".uploadList").on("click", ".deleteFile", function() {
+			var that = $(this);
+			deleteFile(that)
+		});
 	})
 	
 </script>

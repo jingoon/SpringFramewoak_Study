@@ -39,6 +39,12 @@
 				<textarea class="form-control" rows="10" name="content" id="read_input_content" >${vo.content}</textarea>
 			</div>
 		</form>
+
+<!-- 첨부 파일 -->		
+			<div id="fileUI_update" class="form-group hidden-xs"><!-- 폰에서는 안보임  -->
+				<jsp:include page="/WEB-INF/views/file/fileUI.jsp"></jsp:include>
+			</div>		
+		
 		<div class="form-group">
 			<button id="update_btn_update" class="btn btn-warning">수정완료</button>
 			<button id="update_btn_back" class="btn btn-danger">취소</button>
@@ -53,11 +59,30 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
+		var bno = ${vo.bno };
+						
+		// 업로드 파일 목록 획득
+		uploadFileList(bno);
+		
 		$("#update_btn_update").click(function(){
+			// 업로드 파일 전부 append
+	 		var str="";
+	 		$(".deleteFile").each(function(index){
+	 			var that = $(this);
+	 			var data = that.attr("data-src");
+	 			str += "<input type='hidden' name='files["+index+"]' value='"+data+"' >";
+	 		});
+	 			 		
+	 		$("form").append(str);
 			$("form").submit();
 		});
 		$("#update_btn_back").click(function(){
 			history.back();
+		});
+		// 파일 삭제 (태그만 삭제&등록시 DB수정)
+		$(".uploadList").on("click", ".deleteFile", function() {
+			var that = $(this);
+			that.parent().parent().parent().remove();
 		});
 	})
 </script>

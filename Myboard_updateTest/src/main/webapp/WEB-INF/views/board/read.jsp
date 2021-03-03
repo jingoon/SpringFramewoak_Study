@@ -101,10 +101,7 @@
 		</div>	<!-- row -->
 	</div>	<!-- container -->
 
-
-
-
-
+	
 	<script type="text/javascript">
 	$(document).ready(function(){
 		var bno = ${vo.bno};
@@ -114,9 +111,9 @@
 		
 		// 파일 드랍 레이블과 영역 숨기기
 		hiddenInsert();
-		
+				
 		// 업로드 파일 목록 획득
-		uploadFileList(bno);
+		readFileList(bno);
 				
 		//댓글 리셋 함수
 		function replyReset() {

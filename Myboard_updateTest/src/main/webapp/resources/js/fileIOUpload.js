@@ -16,7 +16,19 @@ function uploadImage(data) {
 	return str;
 }
 
-// 업로드 이미지 휴지통 삭제 
+// 업로드 파일 목록
+function uploadFileList(bno) {
+	$.getJSON("/board/getAttach/" + bno, function(result) {
+		$(result).each(function() {
+			var data = this;
+			var str = uploadImage(data);
+			$(".uploadList").append(str);
+		});
+
+	});
+}
+
+// 업로드 이미지 휴지통 삭제 (read)
 function readImage(data) {
 	var name = getFileName(data);
 	var Link = getImageLink(data);
@@ -32,8 +44,8 @@ function readImage(data) {
 	return str;
 }
 
-// 업로드 파일 목록
-function uploadFileList(bno) {
+// 업로드 파일 목록(read)
+function readFileList(bno) {
 	$.getJSON("/board/getAttach/" + bno, function(result) {
 		$(result).each(function() {
 			var data = this;
