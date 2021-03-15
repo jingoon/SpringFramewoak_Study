@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="kr.co.board">
+  	<insert id="insert">
+  		insert into board (bno, title, content, writer) 
+  		values((select nvl2(max(bno), max(bno)+1, 1) from board), #{title}, #{content}, #{writer})
+  		<selectKey order="AFTER" keyProperty="bno" resultType="Integer">
+  			select max(bno) from board
+  		</selectKey>
+  	</insert>
+  
+  	<select id="list" resultType="kr.co.domain.BoardVO">
+  		select * from board order by bno desc
+  	</select>
+  	<select id="read" resultType="kr.co.domain.BoardVO">
+  		select * from board where bno = #{bno}
+  	</select>
+  	<update id="update">
+  		update board set title=#{title}, content=#{content}, writer=#{writer}, updateDate=sysDate 
+  		where bno = #{bno}
+  	</update>
+  	<delete id="delete">
+  		delete from board where bno = #{bno}
+  	</delete>
+  	<select id="getAmount" resultType="Integer">
+  		select count(bno) from board
+  	</select>
+  	
+  	<!-- 댓글  -->
+  	<update id="updateViewCnt">
+  		update board set viewCnt = viewCnt +1 where bno = #{bno}
+  	</update>
+  	<update id="replyCntMinus">
+  		update board set replyCnt = replyCnt -1 where bno = #{bno}
+  	</update>
+  	<update id="replyCntPlus">
+  		update board set replyCnt = replyCnt +1 where bno = #{bno}
+  	</update>
+
+  	<!-- 파일 -->
+  	<insert id="addAttach">
+  		insert into attach (id,fullName, bno) 
+  		values ((select nvl2(max(id),max(id)+1, 1) from attach),#{fullName}, #{bno})
+  	</insert>
+  	<select id="getAttach" resultType="string">
+  		select fullName from attach where bno= #{bno}
+  	</select>
+  	<delete id="deleteAttach">
+  		delete from attach where fullName=#{fullName} and bno=#{bno}
+  	</delete>
+  
+  </mapper>
