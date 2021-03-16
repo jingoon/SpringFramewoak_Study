@@ -18,6 +18,11 @@
  src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 </head>
 <body>
+<!-- 로그인&로그아웃 -->
+	<div class="container-fluid">
+		<jsp:include page="/WEB-INF/views/header/loginHeader.jsp"></jsp:include>
+	</div>
+	<hr>
 	<div class="container">
 		<div class="row">
 			<h1 class="jumbotron">게시글 보기</h1>
@@ -47,8 +52,10 @@
 			</div>
 			
 			<div class="form-group">
-				<button id="read_btn_update" class="btn btn-warning">수정</button>
-				<button id="read_btn_delete" class="btn btn-danger">삭제</button>
+				<c:if test="${login.name == vo.writer}">
+					<button id="read_btn_update" class="btn btn-warning">수정</button>
+					<button id="read_btn_delete" class="btn btn-danger">삭제</button>
+				</c:if>
 				<button id="read_btn_reply" class="btn btn-default">댓글</button>
 				<button id="read_btn_list" class="btn btn-primary">목록</button>
 			</div>

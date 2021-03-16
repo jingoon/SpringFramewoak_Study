@@ -14,7 +14,6 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		HttpSession session = request.getSession();
-		
 		// 로그인 되어있다면 로그아웃 시킴
 		Object login= session.getAttribute("login");
 		 if(login != null) {
@@ -29,7 +28,6 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 		// 세션 작업
 		HttpSession session = request.getSession();
 		Object login = modelAndView.getModel().get("login");
-		
 		if(login != null) {
 			session.setAttribute("login", login);
 			
@@ -39,7 +37,6 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 		}else {
 			response.sendRedirect("/member/login");
 		}
-		
 		
 		
 		

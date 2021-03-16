@@ -10,4 +10,10 @@ public interface MemberService {
 	int insert(MemberVO memberVO);
 
 	MemberVO login(LoginDTO loginDTO);
+
+	MemberVO read(MemberVO vo);
+
+	void update(MemberVO vo);
+
+	void updateD(MemberVO vo);
 }

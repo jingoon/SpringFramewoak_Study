@@ -75,7 +75,7 @@
 				deleteFile(that);
 				
 			});
-			history.back();
+			location.assign("/board/list");
 		})
 		// 파일 삭제
 		$(".uploadList").on("click", ".deleteFile", function() {

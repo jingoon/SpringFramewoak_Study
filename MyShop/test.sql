@@ -50,7 +50,7 @@ ON DELETE CASCADE
 select * from attach
 
 
-------------------------------
+------------------------------변경 및 추가
 
 -- 회원 정보 
 create table member(
@@ -59,7 +59,7 @@ id varchar2(10) not null,
 email varchar2(20) not null,
 pw varchar2(15) not null,
 name varchar2(12) not null,
-phone number(15) not null,
+phone varchar2(16) not null,
 address varchar2(300) not null,
 regdate DATE DEFAULT SYSDATE,
 updatedate DATE DEFAULT SYSDATE,
@@ -69,7 +69,9 @@ mtype number(10) DEFAULT 1,
 memo varchar2(100)
 )
 
+alter table member modify phone varchar2(16) 
 
+select * from member
 
 
 

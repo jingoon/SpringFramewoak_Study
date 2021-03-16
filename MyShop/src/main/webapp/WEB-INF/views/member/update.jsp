@@ -18,27 +18,29 @@
 </script>
 </head>
 <body>
+<!-- 로그인&로그아웃 -->
+	<div class="container-fluid">
+		<jsp:include page="/WEB-INF/views/header/loginHeader.jsp"></jsp:include>
+	</div>
+	<hr>
 
 	<div class="container">
 		<div class="row">	
 			<div class="col-md-12">
 	        <div class="py-7">
 	            <div class="text-center">
-	            <h2>회원가입</h2>
-	            <p class="lead">회원가입하세요.</p>
+	            <h2>회원정보</h2>
+	            <p class="lead">회원 정보 수정</p>
 	            </div>
 	        </div>
 	       
-	        	<form action="/member/insert" id="form" name="form" method="post">
-	        	 
-	        	 <div class="form-group">
+	        	<form action="/member/update" id="form" name="form" method="post">
+	        	 <input id="pw" name="pw" type="password" class="hidden" value="${memberVO.pw}" >
+					<div class="form-group">
 		        	  <div class=".col-xs-12 .col-md-8">
 					    <div class="input-group">
 					      <span id="span1" class="input-group-addon">ID</span>
-					     	 <input name="id" id="id" class="form-control" placeholder="id를 입력하세요">
-					      <span class="input-group-btn">
-					        <button id="btnID" class="btn btn-default" type="button">ID 중복체크</button>
-					      </span>
+					     	 <input name="id" class="form-control" value="${memberVO.id}" readonly="readonly" placeholder="id를 입력하세요">
 					    </div><!-- /input-group -->
 					  </div><!-- /.col-lg-6 -->
 				  </div><!-- /.form-group -->
@@ -47,34 +49,16 @@
 					<div class=".col-xs-12 .col-md-8">
 						<div class="input-group">
 						  <span class="input-group-addon" id="email">email</span>
-						  <input name="email" type="email" class="form-control" required placeholder="email 입력하세요" aria-describedby="email">
+						  <input name="email" type="email" class="form-control" value="${memberVO.email}" required placeholder="email을입력하세요" aria-describedby="email">
 						</div>
 					</div>
 				</div>
-				
-				<div class="form-group">
-					<div class=".col-xs-12 .col-md-8">
-						<div class="input-group">
-						  <span class="input-group-addon" id="pw1">비빌번호</span>
-						  <input name="pw" type="password" class="form-control"  placeholder="Password" aria-describedby="pw1">
-						</div>
-					</div>
-				</div>
-				
-				<div class="form-group">
-					<div class=".col-xs-12 .col-md-8">
-						<div class="input-group">
-						  <span class="input-group-addon" id="pw2">비빌번호확인</span>
-						  <input name="pw2" type="password" class="form-control"  placeholder="Password" aria-describedby="pw2">
-						</div>
-					</div>
-				</div>
-				
+								
 				<div class="form-group">
 					<div class=".col-xs-12 .col-md-8">
 						<div class="input-group">
 						  <span class="input-group-addon" id="name">이름</span>
-						  <input name="name" type="text" class="form-control" required placeholder="이름을 입력하세요" aria-describedby="name">
+						  <input name="name" type="text" class="form-control" value="${memberVO.name }" readonly="readonly" required placeholder="이름을 입력하세요" aria-describedby="name">
 						</div>
 					</div>
 				</div>
@@ -83,7 +67,7 @@
 					<div class=".col-xs-12 .col-md-8">
 						<div class="input-group">
 						  <span class="input-group-addon" id="phone">전화번호</span>
-						  <input name="phone" type="tel" class="form-control" required placeholder="전화번호를 -를 제외하고 입력하세요" aria-describedby="phone">
+						  <input name="phone" type="tel" class="form-control" value="${memberVO.phone }" required placeholder="전화번호를 -를 제외하고 입력하세요" aria-describedby="phone">
 						</div>
 					</div>
 				</div>
@@ -92,7 +76,7 @@
 					<div class=".col-xs-12 .col-md-8">
 						<div class="input-group">
 						  <span class="input-group-addon" id="birth">생일</span>
-						  <input name="birth" type="date" class="form-control" aria-describedby="birth">
+						  <input name="birth" type="date" class="form-control" value="${memberVO.birth }" aria-describedby="birth">
 						</div>
 					</div>
 				</div>
@@ -102,7 +86,7 @@
 						<div class="input-group">
 							<input type="button" class="btn btn-default" onclick="sample4_execDaumPostcode()" value="주소 검색"><br>
 							<input type="text" class="form-control" id="sample4_postcode" readonly placeholder="우편번호"> 
-							<input type="text" class="form-control" name="address" id="sample4_roadAddress" required readonly placeholder="도로명주소"> 
+							<input type="text" class="form-control" name="address" value="${memberVO.address}" id="sample4_roadAddress" required readonly placeholder="도로명주소"> 
 							<input type="hidden" class="form-control" id="sample4_jibunAddress" readonly placeholder="지번주소">
 							<span id="guide" style="color: #999; display: none"></span> 
 							
@@ -114,7 +98,8 @@
 				<div class="form-group">
 					<div class=".col-xs-12 .col-md-8">
 						<div class="input-group">	
-							<input class="btn btn-primary" type="submit" value="가입">
+							<input class="btn btn-primary" type="submit" value="저장">
+							<input id="member_update_btn_delete" class="btn btn-danger" type="button" value="탈퇴하기">
 						</div>
 					</div>
 				</div>
@@ -184,68 +169,18 @@
 </script>
 
   	<script type="text/javascript">
-		var a = false;// id중복체크 확인용
 		$(document).ready(function(){
-			$("input[type=submit]").click(function(event) {
-
-				var idn = $("input[name=id]").val();
-				var pw1 = $("input[name=pw]").val();
-				var pw2 = $("input[name=pw2]").val();
-				var namen = $("input[name=name]").val();
-				var idspan = $("#span1").text();
-				var ids = $.trim(idspan); // 공백 제거
-				if(ids != "사용 가능합니다"){ // 아이디 중복체크 검사
-					alert("id 중복체크를 해주세요");
-					$("#id").select();
-					event.preventDefault();
-					return;
-				} else if (!a) { //아이디 중복체크 
-					alert("id 중복체크를 해주세요");
-					$("#id").select();
-					event.preventDefault();
-					return;
-				} else if (!idn) { //아이디 널체크
-					alert("id를 입력해주세요");
-					$("#id").select();
-					event.preventDefault();
-					return;
-				} else if (pw1 != pw2) {//비밀번호 체크
-					$("#pw1").focus(); // 커서가 깜박깜박
-					$("#pw2").select(); // 드래그 선택됨 
-					alert("비밀번호가 같지 않습니다.");
-					event.preventDefault();// 1+2
-					return;
-				} else if (!pw1) {
-					alert("비밀번호를 입력해주세요");
-					$("#pw1").select();
-					event.preventDefault();
-					return;
-				} else if(!namen){
-					alert("이름을 입력해주세요");
-					$("#name").select();
-					event.preventDefault();
-					return;
+			$("#member_update_btn_delete").click(function(e) {
+				e.preventDefault();
+				var deleteConfig = $("#pw").val();
+				var inputConfig= prompt("탈퇴확인: 비밀번호를 입력하세요");
+				if(inputConfig == deleteConfig){
+					$("#form").attr("action", "/member/updateD");
+					$("#form").submit();
 				}
-			
-			});
-			$("#btnID").click(function(event) {
-				event.preventDefault(); 
-				var id = $("#id").val();
-				if(!id){
-					alert("id를 입력해주세요")
-					return;
-				}
-				$.getJSON("/member/idcheck/"+id, function(data) {
-					var result = data.result;
-					if(result == "o"){
-						$("#span1").text("사용 가능합니다")
-					}else{
-						alert("중복된 아이디 입니다.");
-					}
-				});
-				a = true;
 				
 			});
+			
 			
 		});
 	</script>

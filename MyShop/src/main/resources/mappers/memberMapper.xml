@@ -16,6 +16,11 @@
   	<select id="login" resultType="kr.co.domain.MemberVO">
   		select * from member where id=#{id} and pw=#{pw}
   	</select>
+  	<update id="update">
+  		update member set email=#{email}, phone=#{phone}, birth=#{birth}, address=#{address}, mType=#{mType}, updateDate=sysdate 
+  		where id=#{id} and pw=#{pw} 
+  	</update>
+  	
  
 
 

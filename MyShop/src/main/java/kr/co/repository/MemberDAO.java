@@ -11,4 +11,6 @@ public interface MemberDAO {
 
 	MemberVO login(LoginDTO loginDTO);
 
+	void update(MemberVO vo);
+
 }

@@ -37,4 +37,22 @@ public class MemberServiceImpl implements MemberService{
 		return memberDAO.login(loginDTO);
 	}
 
+	@Override
+	public MemberVO read(MemberVO vo) {
+		// TODO Auto-generated method stub
+		return memberDAO.read(vo.getId());
+	}
+
+	@Override
+	public void update(MemberVO vo) {
+		vo.setmType(1);
+		memberDAO.update(vo);
+	}
+
+	@Override
+	public void updateD(MemberVO vo) {
+		vo.setmType(2);
+		memberDAO.update(vo);
+	}
+
 }

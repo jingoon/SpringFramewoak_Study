@@ -18,7 +18,7 @@
 
 	<div class="container">
 		<div class="row">
-			<form class="form-signin" action="login" method="post">
+			<form class="form-signin" action="loginPost" method="post">
 				<h2 class="form-signin-heading">로그인</h2>
 				<label for="inputEmail" class="sr-only">ID</label> <input name="id"
 					id="input_id" class="form-control" placeholder="ID를 입력하세요" required

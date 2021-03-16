@@ -40,14 +40,14 @@
 		
 		<!-- 로그인  -->
 		<interceptor>
-			<mapping path="/member/login"/>		
+			<mapping path="/member/loginPost"/>		
 			<beans:ref bean="logininterceptor"/>
 		</interceptor>
 		<!-- 로그인인증 -->
 		<interceptor>
 			<mapping path="/board/insert"/>
-			<mapping path="/board/update"/>
-			<mapping path="/board/delete"/>
+			<mapping path="/board/update/**"/>
+			<mapping path="/board/delete/**"/>
 			<beans:ref bean="authinterceptor"/>
 		</interceptor>
 		
